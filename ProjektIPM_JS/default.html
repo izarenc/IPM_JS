@@ -12,11 +12,11 @@
     <!-- ProjektIPM_JS references -->
     <link href="/css/default.css" rel="stylesheet" />
     <link href="/css/SplitView.css" rel="stylesheet" />
-    <script src="/js/default.js"></script>
-    <script src="/js/SplitView.js"></script>
+    
 </head>
 <body class="win-type-body">
     <!--<p>Content goes here</p>-->
+
     <div id="app">
         <div class="splitView" data-win-control="WinJS.UI.SplitView">
             <!-- Pane area -->
@@ -26,18 +26,49 @@
                             data-win-control="WinJS.UI.SplitViewPaneToggle"
                             data-win-options="{ splitView: select('.splitView') }"></button>
                     <div class="title">SplitView Pane area</div>
+
                 </div>
 
                 <div class="nav-commands">
-                    <div data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Home', icon: 'home'}"></div>
+                    <div data-win-bind="onclick:Click" data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Home', icon: 'home'}"></div>
                     <div data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Favorite', icon: 'favorite'}"></div>
                     <div data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Settings', icon: 'settings'}"></div>
                 </div>
             </div>
 
             <!-- Content area -->
-            <div class="contenttext"><h2 class="win-h2">SplitView Content area</h2> </div>
-        </div>
+            <!--<div class="contenttext"><h2 class="win-h2">SplitView Content area</h2> </div>-->
+            
+            <div id="contenthost" class="contenttext"><h2 class="win-h2" data-win-control="Application.PageControlNavigator" data-win-options="{home: '/pages/home/home.html'}">SplitView Content areaaa</h2>
+         
+                <p id="test">This is a Heading</p>
+
+                <!--<script>
+                    document.getElementById("demo2").value = "Hello World!";
+                </script>-->
+
+                <p id="demo">kf</p>
+                <script src="/js/bindinglist.js"></script>
+                <div id="listView"
+                     class="win-selectionstylefilled"
+                     data-win-control="WinJS.UI.ListView"
+                     data-win-options="{
+                                                itemDataSource: Sample.ListView.data.dataSource,
+                                                itemTemplate: select('.smallListIconTextTemplate'),
+                                                selectionMode: 'none',
+                                                tapBehavior: 'none',
+                                                layout: { type: WinJS.UI.ListLayout }
+                                        }">
+                </div>
+
+             
+            </div>
     </div>
+
+        <script src="/js/default.js"></script>
+        <script src="/js/navigator.js"></script>
+        <script src="/js/SplitView.js"></script>
+        <script src="/js/xml.js"></script>
+        
 </body>
 </html>

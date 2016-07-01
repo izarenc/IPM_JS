@@ -46,15 +46,24 @@ class Downloader{
     }
 
     downloadAllYears(){
+        
+        this.startDownloadingAllYears.then(function(){
+            this.parseToDict();
+        });
+        var b = associativeArray[0];
+        //this.parseToDict();
+        var a = associativeArray[5];
+    }
+
+    startDownloadingAllYears() {
+        return new WinJS.Promise(function(complete) {
             var tab=[];
             var currentYear = new Date().getFullYear();
             for (var i = 2002; i < currentYear-1; i++) {
                 this.downloadTxt(this.giveYear(i));
-
             }
             this.downloadTxt("http://www.nbp.pl/kursy/xml/dir.txt", this.parseToDict);
-            var b = associativeArray[0];
-            //this.parseToDict();
-            var a = associativeArray[5];
-        }
+            complete();
+        });
     }
+}

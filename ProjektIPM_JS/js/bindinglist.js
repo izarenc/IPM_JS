@@ -1,13 +1,5 @@
-﻿var itemArray = [
-        { title: "Marvelous Mint", text: "Gelato" },
-        { title: "Succulent Strawberry", text: "Sorbet"},
-        { title: "Banana Blast", text: "Low-fat frozen yogurt" },
-        { title: "Lavish Lemon Ice", text: "Sorbet" },
-        { title: "Creamy Orange", text: "Sorbet" },
-        { title: "Very Vanilla", text: "Ice Cream" },
-        { title: "Banana Blast", text: "Low-fat frozen yogurt"},
-        { title: "Lavish Lemon Ice", text: "Sorbet" }
-];
+﻿
+var itemArray = new WinJS.Binding.List([]);
 
 var listaWalut = []
 document.getElementById("demo").innerHTML = "binding running ";
@@ -28,10 +20,10 @@ function myFunction(xml) {
     for (i = 0; i < lista_pozycji.length; i++) {
         var a = lista_pozycji[i].getElementsByTagName("nazwa_waluty")[0].childNodes[0].nodeValue;
         var temp = new Waluta(lista_pozycji[i].getElementsByTagName("nazwa_waluty")[0].childNodes[0].nodeValue, lista_pozycji[i].getElementsByTagName("przelicznik")[0].childNodes[0].nodeValue.replace(",", "."), lista_pozycji[i].getElementsByTagName("kod_waluty")[0].childNodes[0].nodeValue, lista_pozycji[i].getElementsByTagName("kurs_sredni")[0].childNodes[0].nodeValue.replace(",", "."));
-        itemArray.push(WinJS.Binding.as({ title: "juz bardzo", text: "mam dosc" }));
-        //    title:"juz bardzo",// temp.name,
-        //    text: "mam dosc"//temp.kurs
-        //});
+        itemArray.push(WinJS.Binding.as({ //title: "juz bardzo", text: "mam dosc" }));
+            title: temp.name,
+            text: temp.kurs
+        }));
         document.getElementById("demo").innerHTML = temp.getString();
         //document.getElementById("demo").innerHTML = "Document location: " + lista_pozycji[i].getElementsByTagName("nazwa_waluty")[0].childNodes[0].nodeValue;
     }
@@ -49,7 +41,7 @@ function myFunction(xml) {
 
 
     WinJS.Namespace.define("bindingList", {
-        data: new WinJS.Binding.List(itemArray)
+        data: itemArray
     });
     WinJS.UI.processAll();
 

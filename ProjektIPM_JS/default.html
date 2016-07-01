@@ -13,11 +13,19 @@
     <link href="/css/default.css" rel="stylesheet" />
     <link href="/css/SplitView.css" rel="stylesheet" />
     
-    <script src="/js/jquery-3.0.0.js"></script>
+    <!--<script src="/js/jquery-3.0.0.js"></script>-->
+
+    <script src="/lib/jquery-1.12.4.min.js"></script>
+    <link href="/lib/css/bootstrap-datepicker.css" rel="stylesheet" />
+    <link href="/lib/css/bootstrap-datepicker3.standalone.min.css" rel="stylesheet" />
+    <script src="/lib/js/bootstrap-datepicker.min.js"></script>
+
+
+
 </head>
 <body class="win-type-body">
     <!--<p>Content goes here</p>-->
-
+    <input type="text" id="txtDate"> <!--//tu bedzie kalendarz!!!-->
     <div id="app">
         <div class="splitView" data-win-control="WinJS.UI.SplitView">
             <!-- Pane area -->
@@ -35,11 +43,19 @@
                     <div id="ButtonKursy" data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Favorite', icon: 'favorite'}"></div>
                     <div id="ButtonWaluta" data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Settings', icon: 'settings'}"></div>
                 </div>
+
+                
+
+
             </div>
 
             <!-- Content area -->
             <!--<div class="contenttext"><h2 class="win-h2">SplitView Content area</h2> </div>-->
             <p id="demo">kf</p>
+
+           <progress id="loading" class="win-progress-ring"></progress>
+
+
             <div id="contenthost" class="contenttext"><h2 class="win-h2" data-win-control="Application.PageControlNavigator" data-win-options="{home: '/pages/home/home.html'}">SplitView Content areaaa</h2>
          
                
@@ -47,6 +63,7 @@
                 <div class="smallListIconTextTemplate" data-win-control="WinJS.Binding.Template" style="display: none">
                     <div class="smallListIconTextItem">
                         <div class="smallListIconTextItem-Detail">
+
                             <h4 class="win-h4" data-win-bind="textContent: title"></h4>
                             <h6 class="win-h6" data-win-bind="textContent: text"></h6>
                         </div>
@@ -73,11 +90,11 @@
 
             </div>
     </div>
-
+        <script src="/js/downloader.js"></script>
         <script src="/js/default.js"></script>
         <script src="/js/navigator.js"></script>
         <script src="/js/SplitView.js"></script>
         <script src="/js/xml.js"></script>
-        
+       
 </body>
 </html>

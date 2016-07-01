@@ -26,7 +26,10 @@
 <body class="win-type-body">
     <!--<p>Content goes here</p>-->
     <input type="text" id="txtDate"> <!--//tu bedzie kalendarz!!!-->
+
+
     <div id="app">
+
         <div class="splitView" data-win-control="WinJS.UI.SplitView">
             <!-- Pane area -->
             <div>
@@ -35,7 +38,6 @@
                             data-win-control="WinJS.UI.SplitViewPaneToggle"
                             data-win-options="{ splitView: select('.splitView') }"></button>
                     <div class="title">SplitView Pane area</div>
-
                 </div>
 
                 <div class="nav-commands">
@@ -43,52 +45,18 @@
                     <div id="ButtonKursy" data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Favorite', icon: 'favorite'}"></div>
                     <div id="ButtonWaluta" data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Settings', icon: 'settings'}"></div>
                 </div>
-
-                
-
-
             </div>
+
+            <div id="pageinfo">None</div>
 
             <!-- Content area -->
-            <!--<div class="contenttext"><h2 class="win-h2">SplitView Content area</h2> </div>-->
-            <p id="demo">kf</p>
-
-           <progress id="loading" class="win-progress-ring"></progress>
-
-
             <div id="contenthost" class="contenttext"><h2 class="win-h2" data-win-control="Application.PageControlNavigator" data-win-options="{home: '/pages/home/home.html'}">SplitView Content areaaa</h2>
-         
-               
-
-                <div class="smallListIconTextTemplate" data-win-control="WinJS.Binding.Template" style="display: none">
-                    <div class="smallListIconTextItem">
-                        <div class="smallListIconTextItem-Detail">
-
-                            <h4 class="win-h4" data-win-bind="textContent: title"></h4>
-                            <h6 class="win-h6" data-win-bind="textContent: text"></h6>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- The declarative markup necesary for ListView instantiation -->
-                <!-- Call WinJS.UI.processAll() in your initialization code -->
-                <div id="listView"
-                     class="win-selectionstylefilled"
-                     data-win-control="WinJS.UI.ListView"
-                     data-win-options="{
-                                                itemDataSource: bindingList.data.dataSource,
-                                                itemTemplate: select('.smallListIconTextTemplate'),
-                                                selectionMode: 'none',
-                                                tapBehavior: 'none',
-                                                layout: { type: WinJS.UI.ListLayout }
-                                        }">
-                </div>
-
-
-                <script src="/js/bindinglist.js"></script>
-
+            
+            <!--    NOTHING HERE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->    
 
             </div>
+
+
     </div>
         <script src="/js/downloader.js"></script>
         <script src="/js/default.js"></script>

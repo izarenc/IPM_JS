@@ -7,33 +7,35 @@
     <div>Content goes here.</div>
     <span class="pagetitle">Welcome to page1</span>
 
-    <p id="demo2">kf</p>
+    <progress id="loading" class="win-progress-ring"></progress>
 
+    <!--The template for binding list-->
     <div class="smallListIconTextTemplate" data-win-control="WinJS.Binding.Template" style="display: none">
         <div class="smallListIconTextItem">
             <div class="smallListIconTextItem-Detail">
-                <h4 class="win-h4" data-win-bind="textContent: title"></h4>
-                <h6 class="win-h6" data-win-bind="textContent: text"></h6>
+
+                <h5 class="win-h5" data-win-bind="textContent: tname"></h5>
+                <h5 class="win-h5" data-win-bind="textContent: ttag"></h5>
+                <h5 class="win-h5" data-win-bind="textContent: tkurs"></h5>
             </div>
         </div>
     </div>
 
     <!-- The declarative markup necesary for ListView instantiation -->
-    <!-- Call WinJS.UI.processAll() in your initialization code -->
     <div id="listView"
          class="win-selectionstylefilled"
          data-win-control="WinJS.UI.ListView"
          data-win-options="{
-                                                itemDataSource: bindingList1.data.dataSource,
+                                                itemDataSource: bindingList.data.dataSource,
                                                 itemTemplate: select('.smallListIconTextTemplate'),
                                                 selectionMode: 'none',
                                                 tapBehavior: 'none',
                                                 layout: { type: WinJS.UI.ListLayout }
                                         }">
     </div>
+    <script src="/js/bindinglist.js"></script>
 
 
-    <script src="/page1/bindinglist1.js"></script>
     <script src="/page1/page1.js"></script>
 </body>
 </html>

@@ -2,7 +2,7 @@
 Copyright (c) Microsoft Corporation. All rights reserved
 */
 
-#header {
+/*#header {
     padding: 15px 0px 30px 52px;
 }
 
@@ -10,9 +10,9 @@ Copyright (c) Microsoft Corporation. All rights reserved
     padding: 10px;
     font-size: 12px;
     font-weight: 600;
-}
+}*/
 
-#footer {
+/*#footer {
     padding: 25px 10px;
 }
 
@@ -32,7 +32,7 @@ Copyright (c) Microsoft Corporation. All rights reserved
 
         #footer .links .pipe {
             font-size: 9px;
-        }
+        }*/
 
 button.splitViewButton {
     position: absolute;
@@ -84,7 +84,7 @@ button.splitViewButton {
     display: block;
 }
 
-#contentWrapper {
+/*#contentWrapper {
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -92,9 +92,9 @@ button.splitViewButton {
 
 #statusBox {
     flex-shrink: 0;
-}
+}*/
 
-#contentHost {
+/*#contentHost {
     margin: 10px;
     padding: 0px 42px 10px 42px;
     height: 100%;
@@ -110,20 +110,29 @@ button.splitViewButton {
     #contentHost #scenarioDescription {
         font: 11pt/15pt "Segoe UI";
         font-weight: 300;
-    }
+    }*/
 
    #smallListIconTextItem-Detail
     {
         /*display: table;*/
         width: 100%;
     }
-    .win-h5
+    #obj1
     {
         /*display: table-cell;*/
         
         /*text-align: center;*/
         float: left;
         position: relative;
-        width: 26.67%; 
-        margin-left: 5% ;
+        width: 45%; 
+        height: 30px;
+        /*margin-left: 5% ;*/
+    }
+    #obj2
+    {
+        text-align: center;
+        float: left;
+        position: relative;
+        width: 25%; 
+        /*margin-left: 5% ;*/
     }

@@ -43,6 +43,7 @@ class Downloader{
         var parent = this;
         this.startDownloadingAllYears().then(function(){
             parent.parseToDict();
+            var e =9;
         });
         var b = associativeArray[0];
         //this.parseToDict();

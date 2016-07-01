@@ -22,6 +22,7 @@ $(function () {
     }
 });
 
+
 function myFunction(xml) {
     var xmlDoc = xml.responseXML;
     var lista_pozycji = xmlDoc.getElementsByTagName("pozycja");
@@ -54,4 +55,9 @@ function Waluta(n,p,t,k) {
 
 function toNiceName(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+function readTheDate(dat) {
+
+
 }

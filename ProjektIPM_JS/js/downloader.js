@@ -3,14 +3,13 @@ var array = [];
 
 class Downloader{
 
-    downloadTxt(myurl,a) {
+    downloadTxt(myurl) {
     
         WinJS.xhr({ url: myurl, type: "GET" }).done(
        function completed(request) {
            // handle completed download.
            if (request.status === 200) {
                array = array.concat(request.responseText.split("\r\n").filter((x) =>x.substring(0, 1) === "a"));
-               
                $("#loading").toggle();
            }
            else {
@@ -24,11 +23,6 @@ class Downloader{
            // report on progress of download.
            $("#loading").show();
        });
-
-        if (a) {
-            a();
-            var t = 7;
-        }
 
     }
 
@@ -46,9 +40,9 @@ class Downloader{
     }
 
     downloadAllYears(){
-        
-        this.startDownloadingAllYears.then(function(){
-            this.parseToDict();
+        var parent = this;
+        this.startDownloadingAllYears().then(function(){
+            parent.parseToDict();
         });
         var b = associativeArray[0];
         //this.parseToDict();
@@ -56,13 +50,14 @@ class Downloader{
     }
 
     startDownloadingAllYears() {
+        var parent = this;
         return new WinJS.Promise(function(complete) {
             var tab=[];
             var currentYear = new Date().getFullYear();
             for (var i = 2002; i < currentYear-1; i++) {
-                this.downloadTxt(this.giveYear(i));
+                parent.downloadTxt(parent.giveYear(i));
             }
-            this.downloadTxt("http://www.nbp.pl/kursy/xml/dir.txt", this.parseToDict);
+            parent.downloadTxt("http://www.nbp.pl/kursy/xml/dir.txt");
             complete();
         });
     }

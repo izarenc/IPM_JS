@@ -33,9 +33,10 @@ var datepicker = $('#txtDate').datepicker({
     endDate: new Date(),
     daysOfWeekDisabled: [0,6]
 });
-var myArrayTxt = [];
+
 var down = new Downloader();
 down.downloadAllYears();
+
 var a = 10;
 
 

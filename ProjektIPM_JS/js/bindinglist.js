@@ -1,15 +1,26 @@
 ﻿
-var itemArray = new WinJS.Binding.List([]);
+$(function () {
 
-var listaWalut = []
-var xhttp = new XMLHttpRequest();
-xhttp.onreadystatechange = function () {
-    if (xhttp.readyState == 4 && xhttp.status == 200) {
-        myFunction(xhttp);
+    if (_ActualDate === (new Date()).setHours(0, 0, 0, 0, 0) || _loadedActualDate == false) {
+        var xhttp = new XMLHttpRequest();
+
+        xhttp.onreadystatechange = function () {
+            if (xhttp.readyState == 4 && xhttp.status == 200) {
+                myFunction(xhttp);
+            }
+        };
+        xhttp.open("GET", "http://www.nbp.pl/kursy/xml/a001z160104.xml", true);
+        xhttp.send();
+
+        _ActualDate = new Date();
+        _loadedActualDate = true;
+
+        document.getElementById("titleDay").innerHTML = "Currencies rates from " + _ActualDate.getDate;
     }
-};
-xhttp.open("GET", "http://www.nbp.pl/kursy/xml/a001z160104.xml", true);
-xhttp.send();
+    else {
+        //document.getElementById("pageinfo").innerHTML = "juz zaladowane";
+    }
+});
 
 function myFunction(xml) {
     var xmlDoc = xml.responseXML;
@@ -17,7 +28,7 @@ function myFunction(xml) {
     for (i = 0; i < lista_pozycji.length; i++) {
         var a = lista_pozycji[i].getElementsByTagName("nazwa_waluty")[0].childNodes[0].nodeValue;
         var temp = new Waluta(lista_pozycji[i].getElementsByTagName("nazwa_waluty")[0].childNodes[0].nodeValue, lista_pozycji[i].getElementsByTagName("przelicznik")[0].childNodes[0].nodeValue.replace(",", "."), lista_pozycji[i].getElementsByTagName("kod_waluty")[0].childNodes[0].nodeValue, lista_pozycji[i].getElementsByTagName("kurs_sredni")[0].childNodes[0].nodeValue.replace(",", "."));
-        itemArray.push(WinJS.Binding.as({ //title: "juz bardzo", text: "mam dosc" }));
+        itemArray.push(WinJS.Binding.as({ 
             tname: temp.name,
             ttag: temp.tag,
             tkurs: temp.kurs

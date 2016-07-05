@@ -41,7 +41,9 @@ function myFunction(xml) {
     WinJS.Namespace.define("bindingList", {
         data: itemArray
     });
-    WinJS.UI.processAll();
+    WinJS.UI.processAll().done(function () {
+        document.querySelector('#listView').winControl.oniteminvoked = clickWaluta;
+    });
 
 function Waluta(n,p,t,k) {
     this.name = toNiceName(n);
@@ -61,3 +63,12 @@ function readTheDate(dat) {
 
 
 }
+
+function clickWaluta(event) {
+    event.detail.itemPromise.done(function (invokedItem) {
+        document.getElementById("titleDay").innerHTML = "klik";
+        console.log(invokedItem.data.ttag);
+    });
+}
+
+

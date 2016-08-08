@@ -66,8 +66,10 @@ function readTheDate(dat) {
 
 function clickWaluta(event) {
     event.detail.itemPromise.done(function (invokedItem) {
-        document.getElementById("titleDay").innerHTML = "klik";
+        //document.getElementById("titleDay").innerHTML = "klik";
         console.log(invokedItem.data.ttag);
+        document.getElementById("pageinfo").innerHTML = "page2" + invokedItem.data.ttag+" ";
+        $("#contenthost").load("/page2/page2.html");
     });
 }
 

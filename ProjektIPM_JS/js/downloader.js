@@ -33,6 +33,7 @@ class Downloader{
             d.setYear(d.getFullYear() + 100);
             associativeArray[d] = temp;
         }
+        //this.trigger( myEvent );
         return true;
     }
     giveYear(year) {
@@ -43,11 +44,11 @@ class Downloader{
         var parent = this;
         this.startDownloadingAllYears().then(function(){
             parent.parseToDict();
-            var e =9;
+            //var e =9;
         });
-        var b = associativeArray[0];
+        //var b = associativeArray[0];
         //this.parseToDict();
-        var a = associativeArray[5];
+        //var a = associativeArray[5];
     }
 
     startDownloadingAllYears() {

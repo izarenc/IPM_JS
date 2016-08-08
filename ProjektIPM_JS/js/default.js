@@ -34,6 +34,8 @@ var datepicker = $('#txtDate').datepicker({
     daysOfWeekDisabled: [0,6]
 });
 
+//var myEvent = jQuery.Event("finishDownloading");
+
 var down = new Downloader();
 down.downloadAllYears();
 

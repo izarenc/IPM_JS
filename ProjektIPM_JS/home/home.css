@@ -1,0 +1,13 @@
+﻿body {
+}
+
+
+#datepicker
+    {
+        display: block;
+        margin: auto;
+        margin-top: 2em;
+        /*text-align: center;*/
+        text-align: center;
+        width: 80%;
+    }

@@ -1,7 +1,7 @@
 ﻿//d3.selectAll("p").style("color", "red");
 //document.getElementsByTagName("p").innerHTML = "title22";
 
-document.addEventListener("DOMContentLoaded", function (event) {
+document.onload = function (event) {
     //do work
     
     document.getElementsByTagName("p").innerHTML = "title22";
@@ -95,69 +95,156 @@ function InitChart() {
 
 }
 
-});
+};
 
 //document.getElementById("pageinfo").innerHTML = "page2 - dziala";
 
-//var margin = { top: 20, right: 20, bottom: 30, left: 50 },
-//    width = 960 - margin.left - margin.right,
-//    height = 500 - margin.top - margin.bottom;
 
-//var parseDate = d3.time.format("%d-%b-%y").parse;
 
-//var x = d3.time.scale()
-//    .range([0, width]);
+WinJS.Namespace.define("Charts", {
+    Draw_RadarChart: function () {
+        var radarChartData = {
+            labels: ["Eating", "Drinking", "Sleeping", "Designing", "Coding", "Partying", "Running"],
+            datasets: [
+                {
+                    fillColor: "rgba(220,220,220,0.5)",
+                    strokeColor: "rgba(220,220,220,1)",
+                    pointColor: "rgba(220,220,220,1)",
+                    pointStrokeColor: "#fff",
+                    data: [65, 59, 90, 81, 56, 55, 40]
+                },
+                {
+                    fillColor: "rgba(151,187,205,0.5)",
+                    strokeColor: "rgba(151,187,205,1)",
+                    pointColor: "rgba(151,187,205,1)",
+                    pointStrokeColor: "#fff",
+                    data: [28, 48, 40, 19, 96, 27, 100]
+                }
+            ]
 
-//var y = d3.scale.linear()
-//    .range([height, 0]);
+        }
 
-//var xAxis = d3.svg.axis()
-//    .scale(x)
-//    .orient("bottom");
+        var myRadar = new Chart(document.getElementById("RadarCanvas").getContext("2d")).Radar(radarChartData, { scaleShowLabels: false, pointLabelFontSize: 10 });
+    }
+   , Draw_BarChart: function () {
 
-//var yAxis = d3.svg.axis()
-//    .scale(y)
-//    .orient("left");
+       var barChartData = {
+           labels: ["January", "February", "March", "April", "May", "June", "July"],
+           datasets: [
+               {
+                   fillColor: "rgba(220,220,220,0.5)",
+                   strokeColor: "rgba(220,220,220,1)",
+                   data: [65, 59, 90, 81, 56, 55, 40]
+               },
+               {
+                   fillColor: "rgba(151,187,205,0.5)",
+                   strokeColor: "rgba(151,187,205,1)",
+                   data: [28, 48, 40, 19, 96, 27, 100]
+               }
+           ]
 
-//var area = d3.svg.area()
-//    .x(function (d) { return x(d.date); })
-//    .y0(height)
-//    .y1(function (d) { return y(d.close); });
+       }
 
-//var svg = d3.select("body").append("svg")
-//    .attr("width", width + margin.left + margin.right)
-//    .attr("height", height + margin.top + margin.bottom)
-//  .append("g")
-//    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+       var myLine = new Chart(document.getElementById("BarCanvas").getContext("2d")).Bar(barChartData);
+   }
+   , Draw_DoughnutChart: function () {
+       var doughnutData = [
+                {
+                    value: 30,
+                    color: "#F7464A"
+                },
+                {
+                    value: 50,
+                    color: "#46BFBD"
+                },
+                {
+                    value: 100,
+                    color: "#FDB45C"
+                },
+                {
+                    value: 40,
+                    color: "#949FB1"
+                },
+                {
+                    value: 120,
+                    color: "#4D5360"
+                }
 
-//d3.tsv("data.tsv", function (error, data) {
-//    if (error) throw error;
+       ];
 
-//    data.forEach(function (d) {
-//        d.date = parseDate(d.date);
-//        d.close = +d.close;
-//    });
+       var myDoughnut = new Chart(document.getElementById("doughnutCanvas").getContext("2d")).Doughnut(doughnutData);
+   }
+   , Draw_LineChart: function () {
+       var lineChartData = {
+           labels: ["January", "February", "March", "April", "May", "June", "July"],
+           datasets: [
+               {
+                   fillColor: "rgba(220,220,220,0.5)",
+                   strokeColor: "rgba(220,220,220,1)",
+                   pointColor: "rgba(220,220,220,1)",
+                   pointStrokeColor: "#fff",
+                   data: [65, 59, 90, 81, 56, 55, 40]
+               },
+               {
+                   fillColor: "rgba(151,187,205,0.5)",
+                   strokeColor: "rgba(151,187,205,1)",
+                   pointColor: "rgba(151,187,205,1)",
+                   pointStrokeColor: "#fff",
+                   data: [28, 48, 40, 19, 96, 27, 100]
+               }
+           ]
 
-//    x.domain(d3.extent(data, function (d) { return d.date; }));
-//    y.domain([0, d3.max(data, function (d) { return d.close; })]);
+       }
 
-//    svg.append("path")
-//        .datum(data)
-//        .attr("class", "area")
-//        .attr("d", area);
+       var myLine = new Chart(document.getElementById("lineCanvas").getContext("2d")).Line(lineChartData);
+   }
+   , Draw_PieCanvas: function () {
+       var pieData = [
+                {
+                    value: 30,
+                    color: "#F38630"
+                },
+                {
+                    value: 50,
+                    color: "#E0E4CC"
+                },
+                {
+                    value: 100,
+                    color: "#69D2E7"
+                }
 
-//    svg.append("g")
-//        .attr("class", "x axis")
-//        .attr("transform", "translate(0," + height + ")")
-//        .call(xAxis);
+       ];
 
-//    svg.append("g")
-//        .attr("class", "y axis")
-//        .call(yAxis)
-//      .append("text")
-//        .attr("transform", "rotate(-90)")
-//        .attr("y", 6)
-//        .attr("dy", ".71em")
-//        .style("text-anchor", "end")
-//        .text("Price ($)");
-//});
+       var myPie = new Chart(document.getElementById("pieCanvas").getContext("2d")).Pie(pieData);
+
+   }
+   , Draw_PolarAreaCanvas: function () {
+       var chartData = [
+            {
+                value: Math.random(),
+                color: "#D97041"
+            },
+            {
+                value: Math.random(),
+                color: "#C7604C"
+            },
+            {
+                value: Math.random(),
+                color: "#21323D"
+            },
+            {
+                value: Math.random(),
+                color: "#9D9B7F"
+            },
+            {
+                value: Math.random(),
+                color: "#7D4F6D"
+            },
+            {
+                value: Math.random(),
+                color: "#584A5E"
+            }
+       ];
+       var myPolarArea = new Chart(document.getElementById("polarAreaCanvas").getContext("2d")).PolarArea(chartData);
+   }
+});

@@ -31,7 +31,11 @@
 
 var datepicker = $('#txtDate').datepicker({
     endDate: new Date(),
-    daysOfWeekDisabled: [0,6]
+    daysOfWeekDisabled: [0, 6]
+});
+
+$('#txtDate').on('changeDate', function (ev) {
+    $(this).datepicker('hide');
 });
 
 //var myEvent = jQuery.Event("finishDownloading");
@@ -42,9 +46,3 @@ down.downloadAllYears();
 var a = 10;
 
 
-function cos() {
-    var y = "" + datepicker('getDate').getFullYear()-2000;
-    var m = "" + datepicker('getDate').getMonth() + 1;
-    var d = "" + datepicker('getDate').getDate();
-    return "" + y + (m[1] ? m : "0" + m[0]) + (d[1] ? d : "0" + d[0]);
-}

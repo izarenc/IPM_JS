@@ -79,6 +79,7 @@
     <Content Include="js\navigator.js" />
     <Content Include="js\SplitView.js" />
     <Content Include="js\verifier.js" />
+    <Content Include="lib\canvasjs.min.js" />
     <Content Include="lib\css\bootstrap-datepicker.css" />
     <Content Include="lib\css\bootstrap-datepicker.css.map" />
     <Content Include="lib\css\bootstrap-datepicker.min.css" />

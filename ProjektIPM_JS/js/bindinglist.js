@@ -9,13 +9,16 @@ $(function () {
                 myFunction(xhttp);
             }
         };
-        xhttp.open("GET", "http://www.nbp.pl/kursy/xml/a001z160104.xml", true);
+        xhttp.open("GET", "http://www.nbp.pl/kursy/xml/LastA.xml", true);
         xhttp.send();
 
         _ActualDate = new Date();
         _loadedActualDate = true;
-
-        document.getElementById("titleDay").innerHTML = "Currencies rates from " + _ActualDate.getDate;
+        var m = _ActualDate.getMonth() + 1;
+        var d = _ActualDate.getDate();
+        var datunia = "" + _ActualDate.getFullYear() + "-" + (m>9 ? m : "0" + m) + "-" + (d>9 ? d : "0" + d);
+        
+        document.getElementById("titleDay").innerHTML = "Currencies rates from " + datunia;
     }
     else {
         //document.getElementById("pageinfo").innerHTML = "juz zaladowane";
@@ -25,6 +28,7 @@ $(function () {
 
 function myFunction(xml) {
     var xmlDoc = xml.responseXML;
+    var hgfdxghj = 0;
     var lista_pozycji = xmlDoc.getElementsByTagName("pozycja");
     for (i = 0; i < lista_pozycji.length; i++) {
         var a = lista_pozycji[i].getElementsByTagName("nazwa_waluty")[0].childNodes[0].nodeValue;

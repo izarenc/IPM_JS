@@ -17,3 +17,6 @@
 
 //document.querySelector('#listView').winControl.oniteminvoked = itemInvokedHandler;
 
+
+//var value="<%=request.getParameter ("var1")%>";
+//document.getElementById("titleDay").innerHTML = "Currencies rates from day" + value;

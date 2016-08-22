@@ -29,20 +29,11 @@
 	app.start();
 })();
 
-var datepicker = $('#txtDate').datepicker({
-    endDate: new Date(),
-    daysOfWeekDisabled: [0, 6]
-});
 
-$('#txtDate').on('changeDate', function (ev) {
-    $(this).datepicker('hide');
-});
 
 //var myEvent = jQuery.Event("finishDownloading");
 
 var down = new Downloader();
 down.downloadAllYears();
-
-var a = 10;
 
 

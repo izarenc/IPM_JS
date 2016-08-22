@@ -3,10 +3,44 @@
 
 //document.getElementById("pageinfo").innerHTML = "page2 - dziala";
 
+//http://api.nbp.pl/api/exchangerates/rates/{table}/{code}/{startDate}/{endDate}/
+
+var listaKursow;
+var chart;
+function sciagnij_dane() {
+    var xhttp = new XMLHttpRequest();
+
+    xhttp.onreadystatechange = function () {
+        if (xhttp.readyState == 4 && xhttp.status == 200) {
+            myFunction(xhttp);
+        }
+    };
+    xhttp.open("GET", "http://api.nbp.pl/api/exchangerates/rates/a/eur/2016-01-01/2016-08-01/" + "/?format=xml", true);
+    xhttp.send();
+};
+
+
+function myFunction(xml) {
+    var xmlDoc = xml.responseXML;
+    var lista_pozycji = xmlDoc.getElementsByTagName("Rate");
+    drawChart()
+    for (i = 0; i < lista_pozycji.length; i++) {
+        chart.options.data[0].dataPoints.push({ x: new Date(2013, i, i), y: 450 });
+        console.log("wojdfewidjfejifb");
+        //var a = lista_pozycji[i].getElementsByTagName("nazwa_waluty")[0].childNodes[0].nodeValue;
+        //var temp = new Waluta(lista_pozycji[i].getElementsByTagName("nazwa_waluty")[0].childNodes[0].nodeValue, lista_pozycji[i].getElementsByTagName("przelicznik")[0].childNodes[0].nodeValue.replace(",", "."), lista_pozycji[i].getElementsByTagName("kod_waluty")[0].childNodes[0].nodeValue, lista_pozycji[i].getElementsByTagName("kurs_sredni")[0].childNodes[0].nodeValue.replace(",", "."));
+        //itemArray.push(WinJS.Binding.as({
+        //    tname: temp.name,
+        //    ttag: temp.tag,
+        //    tkurs: temp.kurs
+        //}));
+    }
+    chart.render();
+}
 
 
 function drawChart() {
-    var chart = new CanvasJS.Chart("chartContainer",
+    chart = new CanvasJS.Chart("chartContainer",
     {
 
         title: {
@@ -17,18 +51,6 @@ function drawChart() {
            type: "line",
 
            dataPoints: [
-           { x: new Date(2012, 00, 1), y: 450 },
-           { x: new Date(2012, 01, 1), y: 414 },
-           { x: new Date(2012, 02, 1), y: 520 },
-           { x: new Date(2012, 03, 1), y: 460 },
-           { x: new Date(2012, 04, 1), y: 450 },
-           { x: new Date(2012, 05, 1), y: 500 },
-           { x: new Date(2012, 06, 1), y: 480 },
-           { x: new Date(2012, 07, 1), y: 480 },
-           { x: new Date(2012, 08, 1), y: 410 },
-           { x: new Date(2012, 09, 1), y: 500 },
-           { x: new Date(2012, 10, 1), y: 480 },
-           { x: new Date(2012, 11, 1), y: 510 }
            ]
        }
         ]
@@ -36,4 +58,5 @@ function drawChart() {
 
     chart.render();
 }
-drawChart();
+//drawChart();
+sciagnij_dane()

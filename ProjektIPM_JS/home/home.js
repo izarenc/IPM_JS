@@ -10,8 +10,6 @@ $('#datepicker').on('changeDate', function (ev) {
     var y = "" + $(this).datepicker('getDate').getFullYear() ;
     var m = $(this).datepicker('getDate').getMonth() + 1;
     var d = "" + $(this).datepicker('getDate').getDate();
-    //console.log("" + y + "-" + (m[1] ? m : "0" + m) + "-" + (d[1] ? d : "0" + d));
-    // return "" + y + (m[1] ? m : "0" + m[0]) + (d[1] ? d : "0" + d[0]);
     lalala("" + y + "-" + (m[1] ? m : "0" + m) + "-" + (d[1] ? d : "0" + d));
 });
 

@@ -103,7 +103,6 @@
     <Content Include="page2\page2.css" />
     <Content Include="page2\page2.html" />
     <Content Include="page2\page2.js" />
-    <Content Include="page2\data.tsv" />
     <Content Include="WinJS\css\ui-dark.css" />
     <Content Include="WinJS\css\ui-light.css" />
     <Content Include="WinJS\fonts\Symbols.ttf" />

@@ -4,13 +4,13 @@ var array = [];
 class Downloader{
 
     downloadTxt(myurl) {
-    
+        //$("#loading").toggle();
         WinJS.xhr({ url: myurl, type: "GET" }).done(
        function completed(request) {
            // handle completed download.
            if (request.status === 200) {
                array = array.concat(request.responseText.split("\r\n").filter((x) =>x.substring(0, 1) === "a"));
-               $("#loading").toggle();
+               //$("#loading").toggle();
            }
            else {
                //niepowodzenie
@@ -21,7 +21,7 @@ class Downloader{
        }, 
        function progress(request) {
            // report on progress of download.
-           $("#loading").show();
+           //$("#loading").show();
        });
 
     }

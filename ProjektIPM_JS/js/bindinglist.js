@@ -19,9 +19,14 @@ $(function () {
         var datunia = "" + _ActualDate.getFullYear() + "-" + (m>9 ? m : "0" + m) + "-" + (d>9 ? d : "0" + d);
         
         document.getElementById("titleDay").innerHTML = "Currencies rates from " + datunia;
+
     }
     else {
         //document.getElementById("pageinfo").innerHTML = "juz zaladowane";
+        var m = _ActualDate.getMonth() + 1;
+        var d = _ActualDate.getDate();
+        var datunia = "" + _ActualDate.getFullYear() + "-" + (m > 9 ? m : "0" + m) + "-" + (d > 9 ? d : "0" + d);
+        document.getElementById("titleDay").innerHTML = "Currencies rates from " + datunia;
     }
 });
 
@@ -73,7 +78,9 @@ function clickWaluta(event) {
         //document.getElementById("titleDay").innerHTML = "klik";
         console.log(invokedItem.data.ttag);
         document.getElementById("pageinfo").innerHTML = "page2" + invokedItem.data.ttag+" ";
-        $("#contenthost").load("/page2/page2.html");
+        $("#contenthost").load("/page2/page2.html",function(){
+            sciagnij_dane(invokedItem.data.ttag);}
+);
     });
 }
 

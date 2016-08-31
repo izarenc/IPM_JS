@@ -26,15 +26,20 @@ function sciagnij_dane(tag, fromd, tod) {
     drawChart();
     //chart.options.data = [];
     ///sciagnij_xml(tag, fromd, tod);
-    console.log( (Object.prototype.toString.call(fromd) === '[object Date]'));
-    console.log("t" + typeof (Date.parse(fromd)));
-    console.log("ttt"+Date.parse(fromd))
+    //console.log( (Object.prototype.toString.call(fromd) === '[object Date]'));
+    //console.log("t" + typeof (Date.parse(fromd)));
+    //console.log("ttt"+Date.parse(fromd))
     if (number_of_days_between(fromd, tod) > 92) {
         var i = 0;
         for (; i < number_of_days_between(fromd, tod) ; i += 91) {
-            console.log("1" +i+ (Object.prototype.toString.call(fromd) === '[object Date]'));
+            console.log(addDays(fromd, i+90).getTime() > tod)
+            if (addDays(fromd, i+90).getTime() > tod) {
+                break;
+            }
+            console.log("sciagam: "+addDays(fromd, i)+ addDays(fromd, i + 90));
             sciagnij_xml(tag, addDays(fromd, i), addDays(fromd, i + 90));
         }
+        console.log("sciagam ostatnie: " + addDays(fromd, i) + tod);
         sciagnij_xml(tag, addDays(fromd, i), tod);
         
     }
@@ -42,7 +47,7 @@ function sciagnij_dane(tag, fromd, tod) {
         sciagnij_xml(tag, fromd, tod);
     }
     chart.render();
-    console.log("2" + (Object.prototype.toString.call(fromd) === '[object Date]'));
+    //console.log("2" + (Object.prototype.toString.call(fromd) === '[object Date]'));
 }
 
 function addDays(theDate, days) {
@@ -60,9 +65,9 @@ function sciagnij_xml(tag, fromd, tod) {
     var xhttp = new XMLHttpRequest();
     fromd = new Date(fromd)
     tod = new Date(tod)
-    console.log(fromd)
-    console.log(new Date(fromd))
-    console.log("4" + (fromd instanceof Date));
+    //console.log(fromd)
+    //console.log(new Date(fromd))
+    //console.log("4" + (fromd instanceof Date));
     xhttp.onreadystatechange = function () {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
             myFunction(xhttp);
@@ -107,13 +112,13 @@ function drawChart() {
 
 function dateToDate(datunia) {
     datunia = new Date(datunia)
-    console.log(datunia);
-    console.log("3" + (Object.prototype.toString.call(datunia) === '[object Date]'));
+    //console.log(datunia);
+    //console.log("3" + (Object.prototype.toString.call(datunia) === '[object Date]'));
     var y = "" + datunia.getFullYear();
     var m = datunia.getMonth() + 1;
     var d = datunia.getDate();
-    console.log("siema");
-    console.log("" + y + "-" + (m > 9 ? m : "0" + m) + "-" + (d > 9 ? d : "0" + d));
+    //console.log("siema");
+    //console.log("" + y + "-" + (m > 9 ? m : "0" + m) + "-" + (d > 9 ? d : "0" + d));
     return "" + y + "-" + (m > 9 ? m : "0" + m) + "-" + (d > 9 ? d : "0" + d);
 }
 //drawChart();

@@ -9,6 +9,11 @@ var listaKursow;
 var chart;
 var pushnum = 0;
 
+
+var from_date = addDays(_ActualDate, -100)
+var to_date = _ActualDate
+var aktualna_waluta = "eur"
+
 var datep1 = $('#datep1').datepicker({
     endDate: new Date(),
     daysOfWeekDisabled: [0, 6]
@@ -21,7 +26,31 @@ var datep2 = $('#datep2').datepicker({
 });
 $('#datep2').on('changeDate', function (ev) { $(this).datepicker('hide'); })
 
+$('#datep1').on('changeDate', function (ev) {
+    $(this).datepicker('hide');
 
+    var y = "" + $(this).datepicker('getDate').getFullYear();
+    var m = $(this).datepicker('getDate').getMonth();
+    var d = "" + $(this).datepicker('getDate').getDate();
+
+    from_date = new Date(y, m, d);//yy,mm,dd
+    console.log("from: "+from_date)
+    sciagnij_dane(aktualna_waluta, from_date, to_date);
+    //lalala("" + y + "-" + (m[1] ? m : "0" + m) + "-" + (d[1] ? d : "0" + d));
+});
+
+$('#datep2').on('changeDate', function (ev) {
+    $(this).datepicker('hide');
+
+    var y = "" + $(this).datepicker('getDate').getFullYear();
+    var m = $(this).datepicker('getDate').getMonth();
+    var d = "" + $(this).datepicker('getDate').getDate();
+
+    to_date = new Date(y, m, d);//yy,mm,dd
+    console.log("to: " + to_date)
+    sciagnij_dane(aktualna_waluta, from_date, to_date);
+    //lalala("" + y + "-" + (m[1] ? m : "0" + m) + "-" + (d[1] ? d : "0" + d));
+});
 function sciagnij_dane(tag, fromd, tod) {
     drawChart();
     //chart.options.data = [];
@@ -32,14 +61,14 @@ function sciagnij_dane(tag, fromd, tod) {
     if (number_of_days_between(fromd, tod) > 92) {
         var i = 0;
         for (; i < number_of_days_between(fromd, tod) ; i += 91) {
-            console.log(addDays(fromd, i+90).getTime() > tod)
             if (addDays(fromd, i+90).getTime() > tod) {
                 break;
             }
-            console.log("sciagam: "+addDays(fromd, i)+ addDays(fromd, i + 90));
+            //console.log("sciagam: "+addDays(fromd, i)+ addDays(fromd, i + 90));
             sciagnij_xml(tag, addDays(fromd, i), addDays(fromd, i + 90));
+            //chart.render();
         }
-        console.log("sciagam ostatnie: " + addDays(fromd, i) + tod);
+        //console.log("sciagam ostatnie: " + addDays(fromd, i) + tod);
         sciagnij_xml(tag, addDays(fromd, i), tod);
         
     }
@@ -65,9 +94,6 @@ function sciagnij_xml(tag, fromd, tod) {
     var xhttp = new XMLHttpRequest();
     fromd = new Date(fromd)
     tod = new Date(tod)
-    //console.log(fromd)
-    //console.log(new Date(fromd))
-    //console.log("4" + (fromd instanceof Date));
     xhttp.onreadystatechange = function () {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
             myFunction(xhttp);
@@ -84,8 +110,9 @@ function myFunction(xml) {
     for (i = 0; i < lista_pozycji.length; i++) {
         var a = lista_pozycji[i].getElementsByTagName("EffectiveDate")[0].childNodes[0].nodeValue;
         var b = lista_pozycji[i].getElementsByTagName("Mid")[0].childNodes[0].nodeValue.replace(",", ".");
+        //console.log(a);
         chart.options.data[0].dataPoints.push({ x: new Date(""+a+"T00:00:00"), y: parseFloat(b) });
-        //chart.render();
+        chart.render();
 
     }
     //chart.render();
@@ -122,5 +149,5 @@ function dateToDate(datunia) {
     return "" + y + "-" + (m > 9 ? m : "0" + m) + "-" + (d > 9 ? d : "0" + d);
 }
 //drawChart();
-sciagnij_dane("eur", _FirstDate, _ActualDate);
+sciagnij_dane("eur", from_date, to_date);
 

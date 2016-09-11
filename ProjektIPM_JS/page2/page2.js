@@ -1,18 +1,11 @@
-﻿//d3.selectAll("p").style("color", "red");
-//document.getElementsByTagName("p").innerHTML = "title22";
-
-//document.getElementById("pageinfo").innerHTML = "page2 - dziala";
-
-//http://api.nbp.pl/api/exchangerates/rates/{table}/{code}/{startDate}/{endDate}/
-
-var listaKursow;
+﻿var listaKursow;
 var chart;
 var pushnum = 0;
 
-
-var from_date = addDays(_ActualDate, -100)
+var from_date = addDays(_ActualDate, -50)
 var to_date = _ActualDate
-var aktualna_waluta = "eur"
+var aktualna_waluta = "Euro"
+var aktualny_tag = "eur"
 
 var datep1 = $('#datep1').datepicker({
     endDate: new Date(),
@@ -35,7 +28,7 @@ $('#datep1').on('changeDate', function (ev) {
 
     from_date = new Date(y, m, d);//yy,mm,dd
     console.log("from: "+from_date)
-    sciagnij_dane(aktualna_waluta, from_date, to_date);
+    sciagnij_dane(aktualny_tag,aktualna_waluta, from_date, to_date);
     //lalala("" + y + "-" + (m[1] ? m : "0" + m) + "-" + (d[1] ? d : "0" + d));
 });
 
@@ -48,16 +41,26 @@ $('#datep2').on('changeDate', function (ev) {
 
     to_date = new Date(y, m, d);//yy,mm,dd
     console.log("to: " + to_date)
-    sciagnij_dane(aktualna_waluta, from_date, to_date);
+    sciagnij_dane(aktualny_tag, aktualna_waluta, from_date, to_date);
     //lalala("" + y + "-" + (m[1] ? m : "0" + m) + "-" + (d[1] ? d : "0" + d));
 });
-function sciagnij_dane(tag, fromd, tod) {
+
+function sciagnij_dane2(tag, tname) {
+    sciagnij_dane(tag, tname, from_date, to_date)
+}
+
+function sciagnij_dane(tag, tname, fromd, tod) {
+    aktualna_waluta = tname
+    aktualny_tag=tag
+    document.getElementById("title").innerHTML = "Kurs " + tname;
     drawChart();
     //chart.options.data = [];
     ///sciagnij_xml(tag, fromd, tod);
     //console.log( (Object.prototype.toString.call(fromd) === '[object Date]'));
-    //console.log("t" + typeof (Date.parse(fromd)));
-    //console.log("ttt"+Date.parse(fromd))
+    console.log("t" + typeof (Date.parse(fromd)));
+    //fromd = new Date(fromd)
+   // tod = new Date(tod)
+    console.log(tod)
     if (number_of_days_between(fromd, tod) > 92) {
         var i = 0;
         for (; i < number_of_days_between(fromd, tod) ; i += 91) {
@@ -122,9 +125,6 @@ function myFunction(xml) {
 function drawChart() {
     chart = new CanvasJS.Chart("chartContainer",
     {
-        title: {
-            text: "Earthquakes - per month"
-        },
         data: [
        {
            type: "line",
@@ -149,5 +149,8 @@ function dateToDate(datunia) {
     return "" + y + "-" + (m > 9 ? m : "0" + m) + "-" + (d > 9 ? d : "0" + d);
 }
 //drawChart();
-sciagnij_dane("eur", from_date, to_date);
+function auto() {
+    sciagnij_dane("eur", "Euro", from_date, to_date);
+}
+
 

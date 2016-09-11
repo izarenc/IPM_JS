@@ -53,8 +53,7 @@ function myFunction2(xml,url) {
         }));
         //console.log("dzieje sie"+temp.name);
     }
-    
-    document.getElementById("pageinfo").innerHTML = "page1";
+
     $("#contenthost").load("/page1/page1.html", function () {
         document.getElementById("titleDay").innerHTML = "Currencies rates from " + url;
     }

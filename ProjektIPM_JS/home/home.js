@@ -21,8 +21,6 @@ function lalala(url) {
     xhttp2.onreadystatechange = function () {
         if (xhttp2.readyState == 4 && xhttp2.status == 200) {
             myFunction2(xhttp2,url);
-            //changeTitle(url);
-            //document.getElementById("titleDay").innerHTML = "Currencies rates from day"+url;
         }
         
         if(xhttp2.readyState == 4 && xhttp2.status == 404) {
@@ -31,7 +29,6 @@ function lalala(url) {
     
     };
     xhttp2.open("GET", "http://api.nbp.pl/api/exchangerates/tables/A/" + url + "/?format=xml", true);
-    //console.log("http://api.nbp.pl/api/exchangerates/tables/A/" + url + "/");
     xhttp2.send();
    
 }
@@ -51,7 +48,6 @@ function myFunction2(xml,url) {
             ttag: temp.tag,
             tkurs: temp.kurs
         }));
-        //console.log("dzieje sie"+temp.name);
     }
 
     $("#contenthost").load("/page1/page1.html", function () {
@@ -64,8 +60,4 @@ function myFunction2(xml,url) {
     });
     WinJS.UI.processAll();
 
-    
-
-    //changeTitle("jhbvhjhbv");
-    //document.getElementById("titleDay").innerHTML = "Currensdfgcies rates from day" ;
 }

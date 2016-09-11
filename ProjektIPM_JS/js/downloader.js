@@ -1,10 +1,8 @@
-﻿/// <reference group="Dedicated Worker" /
-var array = [];
+﻿var array = [];
 
 class Downloader{
 
     downloadTxt(myurl) {
-        //$("#loading").toggle();
         WinJS.xhr({ url: myurl, type: "GET" }).done(
        function completed(request) {
            // handle completed download.
@@ -44,11 +42,7 @@ class Downloader{
         var parent = this;
         this.startDownloadingAllYears().then(function(){
             parent.parseToDict();
-            //var e =9;
         });
-        //var b = associativeArray[0];
-        //this.parseToDict();
-        //var a = associativeArray[5];
     }
 
     startDownloadingAllYears() {

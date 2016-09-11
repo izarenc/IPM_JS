@@ -7,6 +7,8 @@ var to_date = _ActualDate
 var aktualna_waluta = "Euro"
 var aktualny_tag = "eur"
 
+var progresik = document.getElementById("loading");
+
 var datep1 = $('#datep1').datepicker({
     endDate: new Date(),
     daysOfWeekDisabled: [0, 6]
@@ -26,10 +28,8 @@ $('#datep1').on('changeDate', function (ev) {
     var m = $(this).datepicker('getDate').getMonth();
     var d = "" + $(this).datepicker('getDate').getDate();
 
-    from_date = new Date(y, m, d);//yy,mm,dd
-    console.log("from: "+from_date)
+    from_date = new Date(y, m, d);
     sciagnij_dane(aktualny_tag,aktualna_waluta, from_date, to_date);
-    //lalala("" + y + "-" + (m[1] ? m : "0" + m) + "-" + (d[1] ? d : "0" + d));
 });
 
 $('#datep2').on('changeDate', function (ev) {
@@ -39,47 +39,42 @@ $('#datep2').on('changeDate', function (ev) {
     var m = $(this).datepicker('getDate').getMonth();
     var d = "" + $(this).datepicker('getDate').getDate();
 
-    to_date = new Date(y, m, d);//yy,mm,dd
-    console.log("to: " + to_date)
+    to_date = new Date(y, m, d);
     sciagnij_dane(aktualny_tag, aktualna_waluta, from_date, to_date);
-    //lalala("" + y + "-" + (m[1] ? m : "0" + m) + "-" + (d[1] ? d : "0" + d));
 });
+
 
 function sciagnij_dane2(tag, tname) {
     sciagnij_dane(tag, tname, from_date, to_date)
 }
 
-function sciagnij_dane(tag, tname, fromd, tod) {
+function sciagnij_dane(tag, tname, fromd, tod, call) {
+    //$("#loading").IsActive = true
+    progresik.value=5
     aktualna_waluta = tname
     aktualny_tag=tag
     document.getElementById("title").innerHTML = "Kurs " + tname;
     drawChart();
-    //chart.options.data = [];
-    ///sciagnij_xml(tag, fromd, tod);
-    //console.log( (Object.prototype.toString.call(fromd) === '[object Date]'));
-    console.log("t" + typeof (Date.parse(fromd)));
-    //fromd = new Date(fromd)
-   // tod = new Date(tod)
-    console.log(tod)
-    if (number_of_days_between(fromd, tod) > 92) {
+    var number_of_days = number_of_days_between(fromd, tod)
+    if (number_of_days > 92) {
         var i = 0;
-        for (; i < number_of_days_between(fromd, tod) ; i += 91) {
-            if (addDays(fromd, i+90).getTime() > tod) {
+        for (; i < number_of_days ; i += 91) {
+            if (addDays(fromd, i + 90).getTime() > tod) {
                 break;
             }
-            //console.log("sciagam: "+addDays(fromd, i)+ addDays(fromd, i + 90));
             sciagnij_xml(tag, addDays(fromd, i), addDays(fromd, i + 90));
-            //chart.render();
+            chart.render();
+            progresik.value += number_of_days / 92.0
         }
-        //console.log("sciagam ostatnie: " + addDays(fromd, i) + tod);
-        sciagnij_xml(tag, addDays(fromd, i), tod);
-        
+        sciagnij_xml2(tag, addDays(fromd, i), tod);
     }
     else {
-        sciagnij_xml(tag, fromd, tod);
+        sciagnij_xml2(tag, fromd, tod);
+        
     }
+
     chart.render();
-    //console.log("2" + (Object.prototype.toString.call(fromd) === '[object Date]'));
+    progresik.value = 100
 }
 
 function addDays(theDate, days) {
@@ -106,6 +101,20 @@ function sciagnij_xml(tag, fromd, tod) {
     xhttp.send();
 };
 
+function sciagnij_xml2(tag, fromd, tod) {
+    
+    var xhttp = new XMLHttpRequest();
+    fromd = new Date(fromd)
+    tod = new Date(tod)
+    xhttp.onreadystatechange = function () {
+        if (xhttp.readyState == 4 && xhttp.status == 200) {
+            myFunction(xhttp);
+        }
+    };
+    xhttp.open("GET", "http://api.nbp.pl/api/exchangerates/rates/a/" + tag + "/" + dateToDate(fromd) + "/" + dateToDate(tod) + "/?format=xml", true);
+    xhttp.send();
+    $("#loading").value = 100
+};
 
 function myFunction(xml) {
     var xmlDoc = xml.responseXML;
@@ -113,12 +122,9 @@ function myFunction(xml) {
     for (i = 0; i < lista_pozycji.length; i++) {
         var a = lista_pozycji[i].getElementsByTagName("EffectiveDate")[0].childNodes[0].nodeValue;
         var b = lista_pozycji[i].getElementsByTagName("Mid")[0].childNodes[0].nodeValue.replace(",", ".");
-        //console.log(a);
         chart.options.data[0].dataPoints.push({ x: new Date(""+a+"T00:00:00"), y: parseFloat(b) });
         chart.render();
-
     }
-    //chart.render();
 }
 
 
@@ -139,18 +145,12 @@ function drawChart() {
 
 function dateToDate(datunia) {
     datunia = new Date(datunia)
-    //console.log(datunia);
-    //console.log("3" + (Object.prototype.toString.call(datunia) === '[object Date]'));
     var y = "" + datunia.getFullYear();
     var m = datunia.getMonth() + 1;
     var d = datunia.getDate();
-    //console.log("siema");
-    //console.log("" + y + "-" + (m > 9 ? m : "0" + m) + "-" + (d > 9 ? d : "0" + d));
     return "" + y + "-" + (m > 9 ? m : "0" + m) + "-" + (d > 9 ? d : "0" + d);
 }
-//drawChart();
+
 function auto() {
     sciagnij_dane("eur", "Euro", from_date, to_date);
 }
-
-
